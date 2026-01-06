@@ -356,6 +356,10 @@
 
         document.getElementById('sizeForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Please Wait...';
             
             const formData = {
                 bust: document.getElementById('bust').value,
