@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funeral Association Leaders Special</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #111111;
+            --accent-color: #ffb6a3;
+            --accent-hover: #ffc1b1;
+            --bg-color: #fcfcfc;
+            --container-bg: #ffffff;
+            --text-color: #111111;
+            --text-muted: #777777;
+            --border-radius: 16px;
+            --btn-radius: 9999px;
+            --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 60px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-premium);
+        }
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', serif;
+            text-align: center;
+        }
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 10px 0 20px;
+            color: var(--primary-color);
+            line-height: 1.1;
+        }
+        h2 {
+            color: var(--accent-color); /* Or maybe keep it dark but highlight? Let's use the accent for emphasis */
+            color: #d35400; /* A darker orange/peach for readability on white, or stick to brand? */
+            /* The brand uses peach #ffb6a3 which is light. For text on white, maybe use black or a darker shade. 
+               Let's use a darker version of the accent or just black with a highlight. 
+               Actually, let's use the primary black for H2 but maybe italic or specific style. 
+               The prompt asked for "highlighted color". Let's use a darker peach/orange for text readability. */
+            color: #e67e22; 
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            background: #fafafa;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: #fff;
+        }
+        button {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            color: #fff; /* White text on peach might be low contrast if peach is very light. 
+                            #ffb6a3 is light. The analysis said "White text". 
+                            Let's check contrast. If it's too light, we might need dark text. 
+                            But let's follow the brand analysis: "Hover: ... White text". 
+                            Let's try black text for default if the background is light, or bold white. */
+            color: #111; 
+            padding: 18px;
+            border: none;
+            border-radius: var(--btn-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 182, 163, 0.4);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 182, 163, 0.6);
+            color: #fff; /* Transition to white on hover as per analysis */
+        }
+        
+        /* Section divider for measurements */
+        h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .guide-image-container {
+            background: #f3f4f6;
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .guide-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 500px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            form {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            button {
+                grid-column: span 1;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Funeral Association Leader Special!</h3>
+        <h1>Get Exclusive Access to Our First Factory Run of 2025</h1>
+        <h2>Get Your First Suit for $150 instead of $225!</h2>
+        
+        <p class="intro-text">Take your measurements and fill out the size tool below to get your size. After you get your size, you can pre-order your suit.</p>
+
+        <form id="sizeForm">
+            <!-- Personal Info -->
+            <div class="full-width">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div>
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <!-- Measurements -->
+            <div class="full-width">
+                <h4 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Measurements (in inches)</h4>
+            </div>
+
+            <div class="full-width guide-image-container">
+                <img src="measurement guide.png" alt="Measurement Guide" class="guide-image">
+            </div>
+            
+            <div>
+                <label for="bust">Bust</label>
+                <input type="number" id="bust" name="bust" min="20" max="80" step="0.25" placeholder="e.g. 35.5" required>
+            </div>
+            
+            <div>
+                <label for="naturalWaist">Natural Waist</label>
+                <input type="number" id="naturalWaist" name="naturalWaist" min="20" max="80" step="0.25" placeholder="e.g. 28.5" required>
+            </div>
+            
+            <div>
+                <label for="pantWaist">Pant Waist (Mid Rise)</label>
+                <input type="number" id="pantWaist" name="pantWaist" min="20" max="80" step="0.25" placeholder="e.g. 30.25" required>
+            </div>
+            
+            <div>
+                <label for="hip">Hip</label>
+                <input type="number" id="hip" name="hip" min="20" max="90" step="0.25" placeholder="e.g. 38.75" required>
+            </div>
+            
+            <div>
+                <label for="thigh">Thigh</label>
+                <input type="number" id="thigh" name="thigh" min="15" max="40" step="0.25" placeholder="e.g. 22.5" required>
+            </div>
+
+            <!-- Empty div for grid alignment -->
+            <div></div>
+
+            <div class="full-width">
+                 <h4 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 10px;">Preferences</h4>
+            </div>
+
+            <div>
+                <label for="jacketLength">Jacket Length</label>
+                <select id="jacketLength" name="jacketLength" required>
+                    <option value="" disabled selected>Select option</option>
+                    <option>Extra Long</option>
+                    <option>Long</option>
+                    <option>Regular</option>
+                    <option>Short</option>
+                    <option>Extra Short</option>
+                </select>
+            </div>
+          
+            <div>
+                <label for="jacketWidth">Jacket Width</label>
+                <select id="jacketWidth" name="jacketWidth" required>
+                    <option value="" disabled selected>Select option</option>
+                    <option>Extra Loose</option>
+                    <option>Loose</option>
+                    <option>Regular</option>
+                    <option>Slim</option>
+                    <option>Extra Slim</option>
+                </select>
+            </div>
+          
+            <div>
+                <label for="pantsLength">Pants Length</label>
+                <select id="pantsLength" name="pantsLength" required>
+                    <option value="" disabled selected>Select option</option>
+                    <option>Extra Long</option>
+                    <option>Long</option>
+                    <option>Regular</option>
+                    <option>Short</option>
+                    <option>Extra Short</option>
+                </select>
+            </div>
+          
+            <div>
+                <label for="pantsWidth">Pants Width</label>
+                <select id="pantsWidth" name="pantsWidth" required>
+                    <option value="" disabled selected>Select option</option>
+                    <option>Extra Loose</option>
+                    <option>Loose</option>
+                    <option>Regular</option>
+                    <option>Slim</option>
+                    <option>Extra Slim</option>
+                </select>
+            </div>
+
+            <button type="submit">Get My Size & Pre-Order</button>
+        </form>
+    </div>
+
+    <script>
+        // Size calculation functions adapted from Size Finder Tool
+        function calculateJacketSize(data) {
+            const bust = parseFloat(data.bust);
+            let baseSize = Math.round(bust / 2) * 2; // Round to nearest even number
+            if (isNaN(baseSize)) return "Checking...";
+            return `${baseSize} ${data.jacketLength}, ${data.jacketWidth}`;
+        }
+
+        function calculatePantSize(data) {
+            const waist = parseFloat(data.pantWaist);
+            let baseSize = Math.round(waist / 2) * 2; // Round to nearest even number
+            if (isNaN(baseSize)) return "Checking...";
+            return `${baseSize} ${data.pantsLength}, ${data.pantsWidth}`;
+        }
+
+        document.getElementById('sizeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                bust: document.getElementById('bust').value,
+                naturalWaist: document.getElementById('naturalWaist').value,
+                pantWaist: document.getElementById('pantWaist').value,
+                hip: document.getElementById('hip').value,
+                thigh: document.getElementById('thigh').value,
+                jacketLength: document.getElementById('jacketLength').value,
+                jacketWidth: document.getElementById('jacketWidth').value,
+                pantsLength: document.getElementById('pantsLength').value,
+                pantsWidth: document.getElementById('pantsWidth').value,
+            };
+
+            const jacketSize = calculateJacketSize(formData);
+            const pantSize = calculatePantSize(formData);
+            const calculatedSize = `Jacket: ${jacketSize} | Pants: ${pantSize}`;
+
+            const userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                size: calculatedSize,
+                detailedMeasurements: formData
+            };
+
+            localStorage.setItem('mea_user_data', JSON.stringify(userData));
+
+            // Send data to Google Sheets Backend
+            // Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with your deployed Web App URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzpbMKgHqI6uh6WLbxk43FtsbFggfXnXGJQj92f5XmVNspXvTSFT3jJ72c2zSKV-Wg-Hg/exec'; 
+            
+            const submissionData = new FormData();
+            submissionData.append('name', userData.name);
+            submissionData.append('email', userData.email);
+            submissionData.append('phone', userData.phone);
+            submissionData.append('bust', formData.bust);
+            submissionData.append('naturalWaist', formData.naturalWaist);
+            submissionData.append('pantWaist', formData.pantWaist);
+            submissionData.append('hip', formData.hip);
+            submissionData.append('thigh', formData.thigh);
+            submissionData.append('jacketLength', formData.jacketLength);
+            submissionData.append('jacketWidth', formData.jacketWidth);
+            submissionData.append('pantsLength', formData.pantsLength);
+            submissionData.append('pantsWidth', formData.pantsWidth);
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: submissionData,
+                mode: 'no-cors' // Important for Google Apps Script
+            })
+            .then(() => {
+                // Redirect after successful submission signal (or immediately since no-cors)
+                window.location.href = 'leadercheckout.html';
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                // Redirect anyway so user isn't stuck
+                window.location.href = 'leadercheckout.html';
+            });
+        });
+    </script>
+</body>
+</html>

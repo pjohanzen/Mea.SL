@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Your Suit - Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reuse variables and base styles for consistency */
+        :root {
+            --primary-color: #111111;
+            --accent-color: #ffb6a3;
+            --accent-hover: #ffc1b1;
+            --bg-color: #fcfcfc;
+            --container-bg: #ffffff;
+            --text-color: #111111;
+            --text-muted: #777777;
+            --success-color: #27ae60;
+            --border-radius: 16px;
+            --btn-radius: 9999px;
+            --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            --mea-peach: #ffb6a3;
+            --mea-peach-light: #ffe8e2;
+            --mea-black: #111111;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        
+        /* Font classes from size_chart */
+        .serif {
+            font-family: 'DM Serif Display', serif;
+        }
+        .font-sans {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Utility classes replacement */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-1 { gap: 0.25rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .pb-2 { padding-bottom: 0.5rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .font-bold { font-weight: 700; }
+        .border-b-2 { border-bottom-width: 2px; }
+        .border-mea-peach { border-color: var(--mea-peach); }
+        .inline-block { display: inline-block; }
+        .rounded-full { border-radius: 9999px; }
+        .border { border-width: 1px; }
+        .bg-white { background-color: white; }
+        .bg-mea-peach { background-color: var(--mea-peach); }
+        .bg-mea-peach-light { background-color: var(--mea-peach-light); }
+        .text-white { color: white; }
+        .text-mea-black { color: var(--mea-black); }
+        
+        /* Table styles */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            border: 1px solid #f3f4f6;
+            margin-top: 1rem;
+        }
+        table {
+            min-width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            white-space: nowrap;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            text-align: center;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            color: #374151;
+            background-color: var(--mea-peach-light);
+            position: sticky; 
+            top: 0;
+        }
+        th:first-child {
+            /* text-align: left; */
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+        td:first-child {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            z-index: 10;
+            font-weight: 500;
+            color: #111;
+            text-align: left;
+        }
+        tr.bg-gray-50 td {
+            background-color: #f9fafb;
+        }
+        tr.bg-gray-50 td:first-child {
+             background-color: #f9fafb;
+        }
+        
+        .modifier-btn {
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--mea-peach);
+        }
+        .modifier-btn:hover {
+            background-color: var(--mea-peach);
+            color: white;
+        }
+        .modifier-btn.active {
+            background-color: var(--mea-peach);
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px; /* Increased max width for table */
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 60px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-premium);
+        }
+        h2, h3 {
+            font-family: 'DM Serif Display', serif;
+            text-align: center;
+        }
+        h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Size Display Box */
+        .size-box {
+            background-color: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-left: 5px solid var(--accent-color);
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .size-box h3 {
+            margin: 0;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .size-result {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Payment Section */
+        .payment-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px;
+            border: 1px solid #e5e5e5;
+            border-radius: var(--border-radius);
+            background: #fff;
+        }
+
+        /* Guarantee Section */
+        .guarantee-box {
+            border: 1px solid var(--accent-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 40px 0;
+            background-color: #fffaf9; /* Very light peach/white mix */
+            text-align: center;
+        }
+        .guarantee-title {
+            color: var(--primary-color);
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Social Proof */
+        .reviews {
+            margin-top: 50px;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 40px;
+        }
+        .review-card {
+            background: #fafafa;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            font-style: italic;
+            color: var(--text-color);
+        }
+        .reviewer {
+            font-weight: 600;
+            font-style: normal;
+            display: block;
+            margin-top: 10px;
+            color: var(--accent-color); /* Use brand accent for names */
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 0;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            color: #111;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: var(--btn-radius);
+            transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 182, 163, 0.4);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 182, 163, 0.6);
+            color: #fff;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+        .back-link svg {
+            margin-right: 6px;
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <!-- Stripe Script -->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
+
+        <div class="size-box" id="sizeDisplay">
+            <h3>Your Recommended Size:</h3>
+            <span class="size-result" id="userSize">Loading...</span>
+        </div>
+
+        <!-- Size Chart Section (Hidden by default until data logic runs? No, visible is fine) -->
+        <div id="size-chart-container">
+             <!-- Jacket Section -->
+            <div class="mb-16" id="jacket-section">
+                <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-6 gap-6">
+                    <h2 class="serif text-3xl border-b-2 border-mea-peach inline-block pb-2">Jacket Measurements</h2>
+                    <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-lg font-sans">Length</span>
+                            <div class="flex flex-wrap gap-1">
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="x-short">X Short</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="short">Short</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-mea-peach text-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors active" data-type="length" data-value="regular">Regular</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="tall">Tall</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="x-tall">X Tall</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-lg font-sans">Width</span>
+                            <div class="flex flex-wrap gap-1">
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="skinny">Skinny</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="slim">Slim</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-mea-peach text-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors active" data-type="width" data-value="regular">Regular</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="loose">Loose</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="x-loose">X Loose</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-container overflow-x-auto shadow-lg rounded-lg border border-gray-100">
+                    <table class="min-w-full divide-y divide-gray-200" id="jacket-table">
+                        <thead class="bg-mea-peach-light">
+                            <tr>
+                                <th scope="col">Size</th>
+                                <th scope="col">32</th>
+                                <th scope="col">34</th>
+                                <th scope="col">36</th>
+                                <th scope="col">38</th>
+                                <th scope="col">40</th>
+                                <th scope="col">42</th>
+                                <th scope="col">44</th>
+                                <th scope="col">46</th>
+                                <th scope="col">48</th>
+                                <th scope="col">50</th>
+                                <th scope="col">52</th>
+                                <th scope="col">54</th>
+                                <th scope="col">56</th>
+                                <th scope="col">58</th>
+                                <th scope="col">60</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr data-measurement="length" data-base-values="26,26,26.25,26.5,26.75,27,27.25,27.5,27.75,28,29.5,30.5,31.5,32.5,33.5">
+                                <td>Length</td><td>26</td><td>26</td><td>26.25</td><td>26.5</td><td>26.75</td><td>27</td><td>27.25</td><td>27.5</td><td>27.75</td><td>28</td><td>29.5</td><td>30.5</td><td>31.5</td><td>32.5</td><td>33.5</td>
+                            </tr>
+                            <tr class="bg-gray-50" data-measurement="chest" data-base-values="35,37,39,41,43,45,47,50,52,54,56,59,61,63,65">
+                                <td>Chest</td><td>35</td><td>37</td><td>39</td><td>41</td><td>43</td><td>45</td><td>47</td><td>50</td><td>52</td><td>54</td><td>56</td><td>59</td><td>61</td><td>63</td><td>65</td>
+                            </tr>
+                            <tr data-measurement="waist" data-base-values="29,31,33,35,37,40,42,45,48,50,52,56,58,61,63">
+                                <td>Waist</td><td>29</td><td>31</td><td>33</td><td>35</td><td>37</td><td>40</td><td>42</td><td>45</td><td>48</td><td>50</td><td>52</td><td>56</td><td>58</td><td>61</td><td>63</td>
+                            </tr>
+                            <tr class="bg-gray-50" data-measurement="hip" data-base-values="36.5,38.5,40.5,42.5,44.5,46.5,48.5,51.5,53.5,55.5,57.5,60.5,62.5,64.5,66.5">
+                                <td>Hip</td><td>36.5</td><td>38.5</td><td>40.5</td><td>42.5</td><td>44.5</td><td>46.5</td><td>48.5</td><td>51.5</td><td>53.5</td><td>55.5</td><td>57.5</td><td>60.5</td><td>62.5</td><td>64.5</td><td>66.5</td>
+                            </tr>
+                            <tr data-measurement="shoulder" data-base-values="15.5,15.75,16,16.5,16.75,17,17.5,17.75,18,18.25,18.5,18.75,19,19.5,20">
+                                <td>Shoulder</td><td>15.5</td><td>15.75</td><td>16</td><td>16.5</td><td>16.75</td><td>17</td><td>17.5</td><td>17.75</td><td>18</td><td>18.25</td><td>18.5</td><td>18.75</td><td>19</td><td>19.5</td><td>20</td>
+                            </tr>
+                            <tr class="bg-gray-50" data-measurement="sleeve" data-base-values="23,23,23,23.5,23.5,23.5,23.5,23.5,23.5,24,24,24,24.5,24.5,25">
+                                <td>Sleeve</td><td>23</td><td>23</td><td>23</td><td>23.5</td><td>23.5</td><td>23.5</td><td>23.5</td><td>23.5</td><td>23.5</td><td>24</td><td>24</td><td>24</td><td>24.5</td><td>24.5</td><td>25</td>
+                            </tr>
+                            <tr data-measurement="bicep" data-base-values="14.75,15,15,15.5,16,16,16,16.5,16.5,17,17.5,18,18.5,19,19.5">
+                                <td>Bicep</td><td>14.75</td><td>15</td><td>15</td><td>15.5</td><td>16</td><td>16</td><td>16</td><td>16.5</td><td>16.5</td><td>17</td><td>17.5</td><td>18</td><td>18.5</td><td>19</td><td>19.5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pants Section -->
+            <div class="mb-16" id="pants-section">
+                <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-6 gap-6">
+                    <h2 class="serif text-3xl border-b-2 border-mea-peach inline-block pb-2">Pants Measurements</h2>
+                    <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-lg font-sans">Length</span>
+                            <div class="flex flex-wrap gap-1">
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="x-short">X Short</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="short">Short</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-mea-peach text-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors active" data-type="length" data-value="regular">Regular</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="tall">Tall</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="length" data-value="x-tall">X Tall</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-lg font-sans">Width</span>
+                            <div class="flex flex-wrap gap-1">
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="skinny">Skinny</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="slim">Slim</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-mea-peach text-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors active" data-type="width" data-value="regular">Regular</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="loose">Loose</button>
+                                <button type="button" class="modifier-btn px-3 py-1 bg-white rounded-full text-xs sm:text-sm border border-mea-peach hover:bg-mea-peach hover:text-white transition-colors" data-type="width" data-value="x-loose">X Loose</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-container overflow-x-auto shadow-lg rounded-lg border border-gray-100">
+                    <table class="min-w-full divide-y divide-gray-200" id="pants-table">
+                        <thead class="bg-mea-peach-light">
+                            <tr>
+                                <th scope="col">Size</th>
+                                <th scope="col">28</th>
+                                <th scope="col">30</th>
+                                <th scope="col">32</th>
+                                <th scope="col">34</th>
+                                <th scope="col">36</th>
+                                <th scope="col">38</th>
+                                <th scope="col">40</th>
+                                <th scope="col">42</th>
+                                <th scope="col">44</th>
+                                <th scope="col">46</th>
+                                <th scope="col">48</th>
+                                <th scope="col">50</th>
+                                <th scope="col">52</th>
+                                <th scope="col">54</th>
+                                <th scope="col">56</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr data-measurement="waist" data-base-values="29,31,33,35,37,39,41,43,45,47,49,51,53,55,57">
+                                <td>Waist</td><td>29</td><td>31</td><td>33</td><td>35</td><td>37</td><td>39</td><td>41</td><td>43</td><td>45</td><td>47</td><td>49</td><td>51</td><td>53</td><td>55</td><td>57</td>
+                            </tr>
+                            <tr class="bg-gray-50" data-measurement="hip" data-base-values="36.5,38.5,40.5,42.5,44.5,45,47,49,50,52,54,55,57,59,61">
+                                <td>Hip</td><td>36.5</td><td>38.5</td><td>40.5</td><td>42.5</td><td>44.5</td><td>45</td><td>47</td><td>49</td><td>50</td><td>52</td><td>54</td><td>55</td><td>57</td><td>59</td><td>61</td>
+                            </tr>
+                            <tr data-measurement="rise" data-base-values="25,25.25,25.75,26,26.5,26.75,27,27.5,28,28.5,29,29.5,30,30.5,31">
+                                <td>Rise</td><td>25</td><td>25.25</td><td>25.75</td><td>26</td><td>26.5</td><td>26.75</td><td>27</td><td>27.5</td><td>28</td><td>28.5</td><td>29</td><td>29.5</td><td>30</td><td>30.5</td><td>31</td>
+                            </tr>
+                            <tr class="bg-gray-50" data-measurement="thigh" data-base-values="25,25.5,26,26.75,27.5,28.25,29,29.75,30.5,31.25,32,33,34,35,36">
+                                <td>Thigh</td><td>25</td><td>25.5</td><td>26</td><td>26.75</td><td>27.5</td><td>28.25</td><td>29</td><td>29.75</td><td>30.5</td><td>31.25</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td>
+                            </tr>
+                            <tr data-measurement="bottom" data-base-values="14,14,14.5,14.5,15,15,15,15.25,15.75,16,16.5,16.75,17.25,17.75,18">
+                                <td>Bottom</td><td>14</td><td>14</td><td>14.5</td><td>14.5</td><td>15</td><td>15</td><td>15</td><td>15.25</td><td>15.75</td><td>16</td><td>16.5</td><td>16.75</td><td>17.25</td><td>17.75</td><td>18</td>
+                            </tr>
+                            <tr class="bg-gray-50" data-measurement="length" data-base-values="38,38,38.5,38.5,38.5,39,39,39,39,39.5,39.5,39.5,39.5,40,40">
+                                <td>Length</td><td>38</td><td>38</td><td>38.5</td><td>38.5</td><td>38.5</td><td>39</td><td>39</td><td>39</td><td>39</td><td>39.5</td><td>39.5</td><td>39.5</td><td>39.5</td><td>40</td><td>40</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-section" id="payment">
+            <h2>Secure Your Suit: Process Payment:</h2>
+            <stripe-buy-button
+              buy-button-id="buy_btn_1ShHdZEIC1oRZt4i3KIe0rgJ"
+              publishable-key="pk_live_51N7fdsEIC1oRZt4iVfuKvYPEd3vh6MaxANf8CwlxBcClDkEpg0DbHkPlTNQNi79KBY1vcJ44UJdsEFBOjOIobkPE00rcgskAji"
+            >
+            </stripe-buy-button>
+        </div>
+
+        <div class="guarantee-box">
+            <span class="guarantee-title">Our Guarantee</span>
+            If your jacket and/or pants aren't close to fitting right and can't be altered, we'll remake your item(s) in your custom size on our next factory run FREE.
+        </div>
+
+        <div class="reviews">
+            <h3>What People Are Saying</h3>
+            <div class="review-card">
+                "The quality of the fabric is outstanding. I was skeptical about ordering online, but the fit was surprisingly accurate."
+                <span class="reviewer">- Dakota</span>
+            </div>
+            <div class="review-card">
+                "Mea site suit details: 100% Wool, Super 120s. Modern cut with attention to detail. A steal at this price."
+                <span class="reviewer">- Product Details</span>
+            </div>
+        </div>
+
+        <a href="#payment" class="cta-button">Complete Your Order</a>
+    </div>
+
+    <script src="size_chart.js"></script>
+    <script>
+        window.onload = function() {
+            const data = localStorage.getItem('mea_user_data');
+            if (data) {
+                const parsedData = JSON.parse(data);
+                document.getElementById('userSize').textContent = parsedData.size || "Standard Fit";
+
+                // Initialize Size Chart based on preferences
+                if (parsedData.detailedMeasurements) {
+                    const measure = parsedData.detailedMeasurements;
+                    
+                    // Helper to click matching button
+                    function clickButton(sectionId, type, label) {
+                        const section = document.getElementById(sectionId);
+                        if (!section) return;
+                        
+                        // Map labels from form to data-value
+                        // Length: Extra Long -> x-tall, Long -> tall, Regular -> regular, Short -> short, Extra Short -> x-short
+                        // Width: Extra Loose -> x-loose, Loose -> loose, Regular -> regular, Slim -> slim, Extra Slim -> skinny
+                        
+                        let dataValue = 'regular';
+                        if (type === 'length') {
+                            if (label === 'Extra Short') dataValue = 'x-short';
+                            else if (label === 'Short') dataValue = 'short';
+                            else if (label === 'Regular') dataValue = 'regular';
+                            else if (label === 'Long') dataValue = 'tall';
+                            else if (label === 'Extra Long') dataValue = 'x-tall';
+                        } else if (type === 'width') {
+                            if (label === 'Extra Slim') dataValue = 'skinny';
+                            else if (label === 'Slim') dataValue = 'slim';
+                            else if (label === 'Regular') dataValue = 'regular';
+                            else if (label === 'Loose') dataValue = 'loose';
+                            else if (label === 'Extra Loose') dataValue = 'x-loose';
+                        }
+                        
+                        const btn = section.querySelector(`.modifier-btn[data-type="${type}"][data-value="${dataValue}"]`);
+                        if (btn) btn.click();
+                    }
+
+                    // Apply Jacket preferences
+                    if (measure.jacketLength) clickButton('jacket-section', 'length', measure.jacketLength);
+                    if (measure.jacketWidth) clickButton('jacket-section', 'width', measure.jacketWidth);
+                    
+                    // Apply Pants preferences
+                    if (measure.pantsLength) clickButton('pants-section', 'length', measure.pantsLength);
+                    if (measure.pantsWidth) clickButton('pants-section', 'width', measure.pantsWidth);
+                }
+
+            } else {
+                document.getElementById('userSize').textContent = "Please complete the sizing form first.";
+            }
+        };
+    </script>
+</body>
+</html>
