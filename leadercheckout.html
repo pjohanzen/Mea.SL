@@ -13,7 +13,7 @@
             --primary-color: #111111;
             --accent-color: #ffb6a3;
             --accent-hover: #ffc1b1;
-            --bg-color: #fcfcfc;
+            --bg-color: #ffe8e2;
             --container-bg: #ffffff;
             --text-color: #111111;
             --text-muted: #777777;
@@ -166,19 +166,119 @@
             margin: 0;
             color: var(--text-muted);
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .size-result {
             font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             color: var(--primary-color);
             display: block;
             margin-top: 10px;
         }
 
-        /* Payment Section */
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+            backdrop-filter: blur(4px);
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 0 auto; 
+            padding: 40px;
+            width: 90%; 
+            max-width: 1100px;
+            border-radius: var(--border-radius);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .close-modal {
+            color: #999;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+        
+        .view-chart-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .view-chart-link:hover {
+            color: var(--accent-color);
+        }
+
+        .details-list {
+            margin: 0 auto 40px;
+            background: #fff;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-premium); /* Match container shadow or make it flat? Let's make it flat inside container if container has shadow? */
+            /* Container has shadow. This is inside container. So make it lighter border. */
+            box-shadow: none;
+            border: 1px solid #f0f0f0;
+            text-align: center;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .detail-item {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .detail-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: #fff;
+        }
+        .detail-item h4 {
+            color: var(--primary-color);
+            margin: 0;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
+        }
+        @media (max-width: 600px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .payment-section {
             text-align: center;
             margin: 40px 0;
@@ -297,10 +397,17 @@
             <span class="size-result" id="userSize">Loading...</span>
         </div>
 
-        <!-- Size Chart Section (Hidden by default until data logic runs? No, visible is fine) -->
-        <div id="size-chart-container">
-             <!-- Jacket Section -->
-            <div class="mb-16" id="jacket-section">
+        <div class="view-chart-link" id="openModalBtn">
+            View detailed size charts
+        </div>
+
+        <!-- Size Chart Modal -->
+        <div id="sizeChartModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="size-chart-container">
+                    <!-- Jacket Section -->
+                    <div class="mb-16" id="jacket-section">
                 <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-6 gap-6">
                     <h2 class="serif text-3xl border-b-2 border-mea-peach inline-block pb-2">Jacket Measurements</h2>
                     <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
@@ -448,6 +555,26 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div> <!-- End Modal -->
+        
+        <div class="details-list">
+            <h3>Product Details</h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h4>Custom Fit</h4>
+                </div>
+                <div class="detail-item">
+                    <h4>Real Pockets</h4>
+                </div>
+                <div class="detail-item">
+                    <h4>Durable + Stretch Fabric</h4>
+                </div>
+                <div class="detail-item">
+                    <h4>Built Smart</h4>
+                </div>
+            </div>
+        </div>
 
         <div class="payment-section" id="payment">
             <h2>Secure Your Suit: Process Payment:</h2>
@@ -458,20 +585,11 @@
             </stripe-buy-button>
         </div>
 
-        <div class="guarantee-box">
-            <span class="guarantee-title">Our Guarantee</span>
-            If your jacket and/or pants aren't close to fitting right and can't be altered, we'll remake your item(s) in your custom size on our next factory run FREE.
-        </div>
-
         <div class="reviews">
             <h3>What People Are Saying</h3>
             <div class="review-card">
-                "The quality of the fabric is outstanding. I was skeptical about ordering online, but the fit was surprisingly accurate."
-                <span class="reviewer">- Dakota</span>
-            </div>
-            <div class="review-card">
-                "Mea site suit details: 100% Wool, Super 120s. Modern cut with attention to detail. A steal at this price."
-                <span class="reviewer">- Product Details</span>
+                "The absolute best customer service you can ask for... the quality of the suits were really amazing and I could not be happier with them!"
+                <span class="reviewer">- Dakota J. • Oklahoma</span>
             </div>
         </div>
 
@@ -480,6 +598,25 @@
 
     <script src="size_chart.js"></script>
     <script>
+        // Modal Logic
+        const modal = document.getElementById("sizeChartModal");
+        const btn = document.getElementById("openModalBtn");
+        const span = document.getElementsByClassName("close-modal")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
         window.onload = function() {
             const data = localStorage.getItem('mea_user_data');
             if (data) {

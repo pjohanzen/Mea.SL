@@ -12,13 +12,14 @@
             --primary-color: #111111;
             --accent-color: #ffb6a3;
             --accent-hover: #ffc1b1;
-            --bg-color: #fcfcfc;
+            --bg-color: #ffe8e2;
             --container-bg: #ffffff;
             --text-color: #111111;
             --text-muted: #777777;
             --border-radius: 16px;
             --btn-radius: 9999px;
             --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            --mea-peach-light: #ffe8e2;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -142,7 +143,7 @@
         }
 
         .guide-image-container {
-            background: #f3f4f6;
+            background: var(--mea-peach-light);
             border-radius: 14px;
             padding: 1.5rem;
             margin-bottom: 1.25rem;
@@ -156,18 +157,63 @@
             max-height: 500px;
         }
 
-        @media (max-width: 600px) {
+        /* Layout Grid for Side-by-Side */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-top: 20px;
+        }
+        .inputs-subgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .section-header {
+             font-family: 'Inter', sans-serif;
+             font-size: 0.85rem;
+             text-transform: uppercase;
+             letter-spacing: 2px;
+             color: var(--text-muted);
+             margin-bottom: 20px;
+             font-weight: 700;
+             margin-top: 10px;
+        }
+        .full-width-col {
+            grid-column: span 2;
+        }
+        .guide-note {
+            background: var(--mea-peach-light); 
+            /* Or maybe a lighter shade or just white? The screenshot has a red/pink background for the note: "Round to nearest quarter inch..." */
+            background: #ffe8e2; 
+            color: #777;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
             .container {
                 padding: 30px 20px;
             }
             form {
+                /* Reset form grid if it was used, now we use inner divs */
+                display: block; 
+            }
+            .layout-grid {
                 grid-template-columns: 1fr;
+            }
+            .inputs-subgrid {
+                grid-template-columns: 1fr; 
             }
             .full-width {
                 grid-column: span 1;
             }
             button {
-                grid-column: span 1;
+                width: 100%;
             }
             h1 {
                 font-size: 2.2rem;
@@ -183,111 +229,112 @@
         
         <p class="intro-text">Take your measurements and fill out the size tool below to get your size. After you get your size, you can pre-order your suit.</p>
 
-        <form id="sizeForm">
+        <form id="sizeForm" style="display: block;">
             <!-- Personal Info -->
-            <div class="full-width">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" required>
-            </div>
-            <div>
-                <label for="email">Email Address</label>
-                <input type="email" id="email" required>
-            </div>
-            <div>
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" required>
-            </div>
-
-            <!-- Measurements -->
-            <div class="full-width">
-                <h4 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Measurements (in inches)</h4>
+            <div class="inputs-subgrid" style="margin-bottom: 30px; grid-template-columns: 1fr 1fr;">
+                <div class="full-width-col">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
             </div>
 
-            <div class="full-width guide-image-container">
-                <img src="measurement guide.png" alt="Measurement Guide" class="guide-image">
-            </div>
-            
-            <div>
-                <label for="bust">Bust</label>
-                <input type="number" id="bust" name="bust" min="20" max="80" step="0.25" placeholder="e.g. 35.5" required>
-            </div>
-            
-            <div>
-                <label for="naturalWaist">Natural Waist</label>
-                <input type="number" id="naturalWaist" name="naturalWaist" min="20" max="80" step="0.25" placeholder="e.g. 28.5" required>
-            </div>
-            
-            <div>
-                <label for="pantWaist">Pant Waist (Mid Rise)</label>
-                <input type="number" id="pantWaist" name="pantWaist" min="20" max="80" step="0.25" placeholder="e.g. 30.25" required>
-            </div>
-            
-            <div>
-                <label for="hip">Hip</label>
-                <input type="number" id="hip" name="hip" min="20" max="90" step="0.25" placeholder="e.g. 38.75" required>
-            </div>
-            
-            <div>
-                <label for="thigh">Thigh</label>
-                <input type="number" id="thigh" name="thigh" min="15" max="40" step="0.25" placeholder="e.g. 22.5" required>
-            </div>
+            <div class="layout-grid">
+                <!-- Left Column: Inputs -->
+                <div>
+                    <h4 class="section-header">Measurements</h4>
+                    <div class="inputs-subgrid">
+                        <div>
+                            <label for="bust">Bust (inches)</label>
+                            <input type="number" id="bust" name="bust" min="20" max="80" step="0.25" placeholder="e.g. 35.5" required>
+                        </div>
+                        <div>
+                            <label for="naturalWaist">Natural Waist (inches)</label>
+                            <input type="number" id="naturalWaist" name="naturalWaist" min="20" max="80" step="0.25" placeholder="e.g. 28.5" required>
+                        </div>
+                        <div>
+                            <label for="pantWaist">Pant Waist (Mid Rise) (inches)</label>
+                            <input type="number" id="pantWaist" name="pantWaist" min="20" max="80" step="0.25" placeholder="e.g. 30" required>
+                        </div>
+                        <div>
+                            <label for="hip">Hip (inches)</label>
+                            <input type="number" id="hip" name="hip" min="20" max="90" step="0.25" placeholder="e.g. 38" required>
+                        </div>
+                        <div class="full-width-col">
+                            <label for="thigh">Thigh (inches)</label>
+                            <input type="number" id="thigh" name="thigh" min="15" max="40" step="0.25" placeholder="e.g. 22" required>
+                        </div>
+                    </div>
 
-            <!-- Empty div for grid alignment -->
-            <div></div>
+                    <h4 class="section-header" style="margin-top: 30px;">Preferences</h4>
+                    <div class="inputs-subgrid">
+                        <div>
+                            <label for="jacketLength">Jacket Length Preference</label>
+                            <select id="jacketLength" name="jacketLength" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Long</option>
+                                <option>Long</option>
+                                <option>Regular</option>
+                                <option>Short</option>
+                                <option>Extra Short</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="jacketWidth">Jacket Width Preference</label>
+                            <select id="jacketWidth" name="jacketWidth" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Loose</option>
+                                <option>Loose</option>
+                                <option>Regular</option>
+                                <option>Slim</option>
+                                <option>Extra Slim</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pantsLength">Pants Length Preference</label>
+                            <select id="pantsLength" name="pantsLength" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Long</option>
+                                <option>Long</option>
+                                <option>Regular</option>
+                                <option>Short</option>
+                                <option>Extra Short</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pantsWidth">Pants Width Preference</label>
+                            <select id="pantsWidth" name="pantsWidth" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Loose</option>
+                                <option>Loose</option>
+                                <option>Regular</option>
+                                <option>Slim</option>
+                                <option>Extra Slim</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="full-width">
-                 <h4 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 10px;">Preferences</h4>
-            </div>
+                    <button type="submit" style="width: 100%; margin-top: 30px;">Get My Size & Pre-Order</button>
+                </div>
 
-            <div>
-                <label for="jacketLength">Jacket Length</label>
-                <select id="jacketLength" name="jacketLength" required>
-                    <option value="" disabled selected>Select option</option>
-                    <option>Extra Long</option>
-                    <option>Long</option>
-                    <option>Regular</option>
-                    <option>Short</option>
-                    <option>Extra Short</option>
-                </select>
+                <!-- Right Column: Guide -->
+                <div>
+                     <h4 class="section-header">Measurement Guide</h4>
+                     <div class="guide-image-container">
+                        <img src="measurement guide.png" alt="Measurement Guide" class="guide-image">
+                     </div>
+                     <div class="guide-note">
+                        Round to the nearest quarter inch—we'll take care of the rest.
+                     </div>
+                </div>
             </div>
-          
-            <div>
-                <label for="jacketWidth">Jacket Width</label>
-                <select id="jacketWidth" name="jacketWidth" required>
-                    <option value="" disabled selected>Select option</option>
-                    <option>Extra Loose</option>
-                    <option>Loose</option>
-                    <option>Regular</option>
-                    <option>Slim</option>
-                    <option>Extra Slim</option>
-                </select>
-            </div>
-          
-            <div>
-                <label for="pantsLength">Pants Length</label>
-                <select id="pantsLength" name="pantsLength" required>
-                    <option value="" disabled selected>Select option</option>
-                    <option>Extra Long</option>
-                    <option>Long</option>
-                    <option>Regular</option>
-                    <option>Short</option>
-                    <option>Extra Short</option>
-                </select>
-            </div>
-          
-            <div>
-                <label for="pantsWidth">Pants Width</label>
-                <select id="pantsWidth" name="pantsWidth" required>
-                    <option value="" disabled selected>Select option</option>
-                    <option>Extra Loose</option>
-                    <option>Loose</option>
-                    <option>Regular</option>
-                    <option>Slim</option>
-                    <option>Extra Slim</option>
-                </select>
-            </div>
-
-            <button type="submit">Get My Size & Pre-Order</button>
         </form>
     </div>
 
