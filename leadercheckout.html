@@ -30,7 +30,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             line-height: 1.6;
         }
         
@@ -136,7 +136,7 @@
 
         .container {
             max-width: 1200px; /* Increased max width for table */
-            margin: 0 auto;
+            margin: 40px auto;
             background: var(--container-bg);
             padding: 60px;
             border-radius: var(--border-radius);
@@ -497,11 +497,27 @@
                 padding: 30px 20px;
             }
         }
+        
+        .logo-header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: flex-start;
+            box-sizing: border-box;
+        }
+        .logo-header img {
+            height: 80px;
+            display: block;
+        }
     </style>
     <!-- Stripe Script -->
     <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
+    <div class="logo-header">
+        <img src="logo.png" alt="Mea Logo">
+    </div>
     <div class="container">
         <a href="index.html" class="back-link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

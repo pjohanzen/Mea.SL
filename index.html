@@ -26,12 +26,12 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             line-height: 1.6;
         }
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 40px auto;
             background: var(--container-bg);
             padding: 60px;
             border-radius: var(--border-radius);
@@ -213,9 +213,25 @@
                 font-size: 2.2rem;
             }
         }
+        
+        .logo-header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: flex-start;
+            box-sizing: border-box;
+        }
+        .logo-header img {
+            height: 80px;
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <div class="logo-header">
+        <img src="logo.png" alt="Mea Logo">
+    </div>
     <div class="container">
         <h3>Funeral Association Leader Special!</h3>
         <h1>Get Exclusive Access to Our First Factory Run of 2025</h1>
