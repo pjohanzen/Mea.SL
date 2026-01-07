@@ -222,17 +222,24 @@
         
         .view-chart-link {
             display: block;
+            width: fit-content;
+            margin: 0 auto 40px;
+            padding: 12px 24px;
+            background-color: var(--mea-peach);
+            color: var(--mea-black);
             text-align: center;
-            margin-bottom: 40px;
-            color: var(--text-muted);
-            text-decoration: underline;
+            text-decoration: none;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.9rem;
-            transition: color 0.2s;
+            border-radius: var(--btn-radius);
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(255, 182, 163, 0.3);
         }
         .view-chart-link:hover {
-            color: var(--accent-color);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(255, 182, 163, 0.4);
+            filter: brightness(1.05);
         }
 
         .details-list {
@@ -308,27 +315,59 @@
         /* Social Proof */
         .reviews {
             margin-top: 50px;
-            border-top: 1px solid #e5e5e5;
-            padding-top: 40px;
+            padding: 60px 20px;
+            background-color: #ffe8e2; /* Light peach bg */
+            border-radius: var(--border-radius);
+            text-align: center;
         }
         .review-card {
-            background: #fafafa;
-            padding: 25px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            color: var(--primary-color);
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.05);
+        }
+        .quote-mark {
+            font-family: serif;
+            font-size: 5rem;
+            line-height: 0.5;
+            color: #ffe8e2; /* Same as bg, or slightly darker to stand out on white? Image shows very light pink */
+            color: #ffd6cc; 
+            display: block;
             margin-bottom: 20px;
-            border-radius: 12px;
+            margin-top: -10px;
+        }
+        .review-text {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 1.5rem;
+            line-height: 1.6;
             font-style: italic;
-            color: var(--text-color);
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #111;
         }
         .reviewer {
-            font-weight: 600;
-            font-style: normal;
-            display: block;
-            margin-top: 10px;
-            color: var(--accent-color); /* Use brand accent for names */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-style: normal;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #777;
+        }
+        .reviewer::before, .reviewer::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent-color);
         }
 
         /* CTA Button */
@@ -372,6 +411,85 @@
             margin-right: 6px;
             width: 16px;
             height: 16px;
+        }
+
+        /* Product Features Section */
+        .features-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 40px auto; /* Centered margin */
+            padding: 0 10px;
+            max-width: 900px; /* Constrain width for centering */
+            justify-content: center; /* Center content */
+        }
+        @media (min-width: 768px) {
+            .features-container {
+                flex-direction: row;
+                gap: 50px; /* Increased gap slightly for balance */
+            }
+        }
+        .features-sidebar {
+            flex: 0 0 200px; /* Reduced width */
+            display: flex;
+            flex-direction: column;
+            gap: 5px; /* Tighter gap */
+        }
+        .feature-tab {
+            padding: 10px 15px; /* Smaller padding */
+            text-transform: uppercase;
+            font-size: 0.75rem; /* Smaller font */
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 4px; 
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+        .feature-tab:hover {
+            color: var(--primary-color);
+        }
+        .feature-tab.active {
+            background-color: var(--mea-peach-light);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .features-content {
+            flex: 1;
+        }
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 1rem; /* Smaller description */
+            margin-bottom: 20px; /* Reduced margin */
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+        .feature-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 600px; /* Constrain max width of images */
+        }
+        .feature-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            aspect-ratio: 3/4;
+            background-color: #eee;
+        }
+        
+        /* Animation Utility */
+        .features-content > * {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .features-content.fading-out > * {
+            opacity: 0;
+            transform: translateY(10px);
         }
 
         @media (max-width: 600px) {
@@ -558,20 +676,18 @@
         </div>
         </div> <!-- End Modal -->
         
-        <div class="details-list">
-            <h3>Product Details</h3>
-            <div class="details-grid">
-                <div class="detail-item">
-                    <h4>Custom Fit</h4>
-                </div>
-                <div class="detail-item">
-                    <h4>Real Pockets</h4>
-                </div>
-                <div class="detail-item">
-                    <h4>Durable + Stretch Fabric</h4>
-                </div>
-                <div class="detail-item">
-                    <h4>Built Smart</h4>
+        <div class="features-container">
+            <div class="features-sidebar">
+                <div class="feature-tab active" onclick="switchFeature('fit', this)">Custom Fit</div>
+                <div class="feature-tab" onclick="switchFeature('pockets', this)">Real Pockets</div>
+                <div class="feature-tab" onclick="switchFeature('fabric', this)">Durable + Stretch Fabric</div>
+                <div class="feature-tab" onclick="switchFeature('smart', this)">Built Smart</div>
+            </div>
+            <div class="features-content">
+                <p class="feature-description" id="feature-desc">Get your first suit in a modified standard size. Provide feedback to build your custom size.</p>
+                <div class="feature-images">
+                    <img id="feature-img-1" src="https://measuit.com/Custom_Fit2.jpg" class="feature-img" alt="Feature View 1">
+                    <img id="feature-img-2" src="https://measuit.com/Custom_Fit1.jpg" class="feature-img" alt="Feature View 2">
                 </div>
             </div>
         </div>
@@ -586,10 +702,12 @@
         </div>
 
         <div class="reviews">
-            <h3>What People Are Saying</h3>
             <div class="review-card">
-                "The absolute best customer service you can ask for... the quality of the suits were really amazing and I could not be happier with them!"
-                <span class="reviewer">- Dakota J. • Oklahoma</span>
+                <span class="quote-mark">“</span>
+                <div class="review-text">
+                    The absolute best customer service you can ask for... the quality of the suits were really amazing and I could not be happier with them!
+                </div>
+                <div class="reviewer">Dakota J. • Oklahoma</div>
             </div>
         </div>
 
@@ -668,6 +786,53 @@
                 document.getElementById('userSize').textContent = "Please complete the sizing form first.";
             }
         };
+
+        const featureData = {
+            fit: {
+                text: "Get your first suit in a modified standard size. Provide feedback to build your custom size.",
+                img1: "https://measuit.com/Custom_Fit2.jpg",
+                img2: "https://measuit.com/Custom_Fit1.jpg"
+            },
+            pockets: {
+                text: "We include real pockets inside and outside your suit jacket + on pants/skirts, so you don't have to carry a bag on the go.",
+                img1: "https://measuit.com/Real_Pockets2.jpg",
+                img2: "https://measuit.com/Real_Pockets1.jpg"
+            },
+            fabric: {
+                text: "Our signature stretch fabric is 8% spandex for high flexibility. You'll love the way this suit feels.",
+                img1: "https://measuit.com/Durable1.jpg",
+                img2: "https://measuit.com/Durable2.jpg"
+            },
+            smart: {
+                text: "Our jackets are only partially lined to give more flexibility in the upper back and breathe more. We add an elastic adjuster in the waistband so your pants fit any time of the month.",
+                img1: "https://measuit.com/Smart1.jpg",
+                img2: "https://measuit.com/Smart2.jpg"
+            }
+        };
+
+        function switchFeature(key, tabElement) {
+            // Update Active Tab
+            document.querySelectorAll('.feature-tab').forEach(t => t.classList.remove('active'));
+            tabElement.classList.add('active');
+
+            const contentContainer = document.querySelector('.features-content');
+            
+            // Start Fade Out
+            contentContainer.classList.add('fading-out');
+
+            // Wait for transition
+            setTimeout(() => {
+                // Update Content
+                const data = featureData[key];
+                if (data) {
+                    document.getElementById('feature-desc').textContent = data.text;
+                    document.getElementById('feature-img-1').src = data.img1;
+                    document.getElementById('feature-img-2').src = data.img2;
+                }
+                // Fade In
+                contentContainer.classList.remove('fading-out');
+            }, 300);
+        }
     </script>
 </body>
 </html>
