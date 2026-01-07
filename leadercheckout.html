@@ -676,24 +676,8 @@
         </div>
         </div> <!-- End Modal -->
         
-        <div class="features-container">
-            <div class="features-sidebar">
-                <div class="feature-tab active" onclick="switchFeature('fit', this)">Custom Fit</div>
-                <div class="feature-tab" onclick="switchFeature('pockets', this)">Real Pockets</div>
-                <div class="feature-tab" onclick="switchFeature('fabric', this)">Durable + Stretch Fabric</div>
-                <div class="feature-tab" onclick="switchFeature('smart', this)">Built Smart</div>
-            </div>
-            <div class="features-content">
-                <p class="feature-description" id="feature-desc">Get your first suit in a modified standard size. Provide feedback to build your custom size.</p>
-                <div class="feature-images">
-                    <img id="feature-img-1" src="https://measuit.com/Custom_Fit2.jpg" class="feature-img" alt="Feature View 1">
-                    <img id="feature-img-2" src="https://measuit.com/Custom_Fit1.jpg" class="feature-img" alt="Feature View 2">
-                </div>
-            </div>
-        </div>
-
         <div class="payment-section" id="payment">
-            <h2>Secure Your Suit: Process Payment:</h2>
+            <h2>Secure Your Suit Today:</h2>
             <stripe-buy-button
               buy-button-id="buy_btn_1ShHdZEIC1oRZt4i3KIe0rgJ"
               publishable-key="pk_live_51N7fdsEIC1oRZt4iVfuKvYPEd3vh6MaxANf8CwlxBcClDkEpg0DbHkPlTNQNi79KBY1vcJ44UJdsEFBOjOIobkPE00rcgskAji"
@@ -711,7 +695,23 @@
             </div>
         </div>
 
-        <a href="#payment" class="cta-button">Complete Your Order</a>
+        <div class="features-container">
+            <div class="features-sidebar">
+                <div class="feature-tab active" onclick="switchFeature('fit', this)">Custom Fit</div>
+                <div class="feature-tab" onclick="switchFeature('pockets', this)">Real Pockets</div>
+                <div class="feature-tab" onclick="switchFeature('fabric', this)">Durable + Stretch Fabric</div>
+                <div class="feature-tab" onclick="switchFeature('smart', this)">Built Smart</div>
+            </div>
+            <div class="features-content">
+                <p class="feature-description" id="feature-desc">Get your first suit in a modified standard size. Provide feedback to build your custom size.</p>
+                <div class="feature-images">
+                    <img id="feature-img-1" src="https://measuit.com/Custom_Fit2.jpg" class="feature-img" alt="Feature View 1">
+                    <img id="feature-img-2" src="https://measuit.com/Custom_Fit1.jpg" class="feature-img" alt="Feature View 2">
+                </div>
+            </div>
+        </div>
+
+        <a href="https://buy.stripe.com/00w14ngiCcUK6Xh1iv2wU0T?locale=en&__embed_source=buy_btn_1ShHdZEIC1oRZt4i3KIe0rgJ" class="cta-button">Complete Your Order</a>
     </div>
 
     <script src="size_chart.js"></script>
