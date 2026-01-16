@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funeral Association Leaders Special</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #111111;
+            --accent-color: #ffb6a3;
+            --accent-hover: #ffc1b1;
+            --bg-color: #ffe8e2;
+            --container-bg: #ffffff;
+            --text-color: #111111;
+            --text-muted: #777777;
+            --border-radius: 16px;
+            --btn-radius: 9999px;
+            --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            --mea-peach-light: #ffe8e2;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: var(--container-bg);
+            padding: 60px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-premium);
+        }
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', serif;
+            text-align: center;
+        }
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 10px 0 20px;
+            color: var(--primary-color);
+            line-height: 1.1;
+        }
+        h2 {
+            color: #ff3131; 
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+            background: #fafafa;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: #fff;
+        }
+        button {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            color: #fff; /* White text on peach might be low contrast if peach is very light. 
+                            #ffb6a3 is light. The analysis said "White text". 
+                            Let's check contrast. If it's too light, we might need dark text. 
+                            But let's follow the brand analysis: "Hover: ... White text". 
+                            Let's try black text for default if the background is light, or bold white. */
+            color: #111; 
+            padding: 18px;
+            border: none;
+            border-radius: var(--btn-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 182, 163, 0.4);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 182, 163, 0.6);
+            color: #fff; /* Transition to white on hover as per analysis */
+        }
+        
+        /* Section divider for measurements */
+        h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .guide-image-container {
+            background: var(--mea-peach-light);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .guide-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 600px;
+        }
+
+        /* Layout Grid for Side-by-Side */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: start;
+            margin-top: 20px;
+        }
+        .inputs-subgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .section-header {
+             font-family: 'Inter', sans-serif;
+             font-size: 0.85rem;
+             text-transform: uppercase;
+             letter-spacing: 2px;
+             color: var(--text-muted);
+             margin-bottom: 20px;
+             font-weight: 700;
+             margin-top: 10px;
+        }
+        .full-width-col {
+            grid-column: span 2;
+        }
+        .guide-note {
+            background: var(--mea-peach-light); 
+            /* Or maybe a lighter shade or just white? The screenshot has a red/pink background for the note: "Round to nearest quarter inch..." */
+            background: #ffe8e2; 
+            color: #777;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 30px 20px;
+            }
+            form {
+                /* Reset form grid if it was used, now we use inner divs */
+                display: block; 
+            }
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .inputs-subgrid {
+                grid-template-columns: 1fr; 
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            button {
+                width: 100%;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .measurements-column {
+                order: 2;
+            }
+            .guide-column {
+                order: 1;
+            }
+        }
+        
+        .logo-header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: flex-start;
+            box-sizing: border-box;
+        }
+        .logo-header img {
+            height: 80px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-header">
+        <img src="logo.png" alt="Mea Logo">
+    </div>
+    <div class="container">
+        <h3>Funeral Association Leader Special!</h3>
+        <h1>Get Exclusive Access to Our First Factory Run of 2025</h1>
+        <h2>Get Your First Suit for $150 instead of $225!</h2>
+        
+        <p class="intro-text">Take your measurements and fill out the size tool below to get your size. After you get your size, you can pre-order your suit.</p>
+
+        <form id="sizeForm" style="display: block;">
+            <!-- Personal Info -->
+            <div class="inputs-subgrid" style="margin-bottom: 30px; grid-template-columns: 1fr 1fr;">
+                <div class="full-width-col">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+            </div>
+
+            <div class="layout-grid">
+                <!-- Left Column: Inputs -->
+                <div class="measurements-column">
+                    <h4 class="section-header">Measurements</h4>
+                    <div class="inputs-subgrid">
+                        <div>
+                            <label for="bust">Bust (inches)</label>
+                            <input type="number" id="bust" name="bust" min="20" max="80" step="0.25" placeholder="e.g. 35.5" required>
+                        </div>
+                        <div>
+                            <label for="naturalWaist">Natural Waist (inches)</label>
+                            <input type="number" id="naturalWaist" name="naturalWaist" min="20" max="80" step="0.25" placeholder="e.g. 28.5" required>
+                        </div>
+                        <div>
+                            <label for="pantWaist">Pant Waist (Mid Rise) (inches)</label>
+                            <input type="number" id="pantWaist" name="pantWaist" min="20" max="80" step="0.25" placeholder="e.g. 30" required>
+                        </div>
+                        <div>
+                            <label for="hip">Hip (inches)</label>
+                            <input type="number" id="hip" name="hip" min="20" max="90" step="0.25" placeholder="e.g. 38" required>
+                        </div>
+                        <div>
+                            <label for="thigh">Thigh (inches)</label>
+                            <input type="number" id="thigh" name="thigh" min="15" max="40" step="0.25" placeholder="e.g. 22" required>
+                        </div>
+                    </div>
+
+                    <h4 class="section-header" style="margin-top: 30px;">Preferences</h4>
+                    <div class="inputs-subgrid">
+                        <div>
+                            <label for="jacketLength">Jacket Length Preference</label>
+                            <select id="jacketLength" name="jacketLength" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Long</option>
+                                <option>Long</option>
+                                <option>Regular</option>
+                                <option>Short</option>
+                                <option>Extra Short</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="jacketWidth">Jacket Width Preference</label>
+                            <select id="jacketWidth" name="jacketWidth" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Loose</option>
+                                <option>Loose</option>
+                                <option>Regular</option>
+                                <option>Slim</option>
+                                <option>Extra Slim</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pantsLength">Pants Length Preference</label>
+                            <select id="pantsLength" name="pantsLength" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Long</option>
+                                <option>Long</option>
+                                <option>Regular</option>
+                                <option>Short</option>
+                                <option>Extra Short</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pantsWidth">Pants Width Preference</label>
+                            <select id="pantsWidth" name="pantsWidth" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option>Extra Loose</option>
+                                <option>Loose</option>
+                                <option>Regular</option>
+                                <option>Slim</option>
+                                <option>Extra Slim</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" style="width: 100%; margin-top: 30px;">Get My Size & Pre-Order</button>
+                </div>
+
+                <!-- Right Column: Guide -->
+                <div class="guide-column">
+                     <h4 class="section-header">Measurement Guide</h4>
+                     <div class="guide-image-container">
+                        <img src="measurement guide.png" alt="Measurement Guide" class="guide-image">
+                     </div>
+                     <div class="guide-note">
+                        Round to the nearest quarter inch—we'll take care of the rest.
+                     </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Size calculation functions adapted from Size Finder Tool
+        function calculateJacketSize(data) {
+            const bust = parseFloat(data.bust);
+            let baseSize = Math.round(bust / 2) * 2; // Round to nearest even number
+            if (isNaN(baseSize)) return "Checking...";
+            return `${baseSize} ${data.jacketLength}, ${data.jacketWidth}`;
+        }
+
+        function calculatePantSize(data) {
+            const waist = parseFloat(data.pantWaist);
+            let baseSize = Math.round(waist / 2) * 2; // Round to nearest even number
+            if (isNaN(baseSize)) return "Checking...";
+            return `${baseSize} ${data.pantsLength}, ${data.pantsWidth}`;
+        }
+
+        document.getElementById('sizeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Please Wait...';
+            
+            const formData = {
+                bust: document.getElementById('bust').value,
+                naturalWaist: document.getElementById('naturalWaist').value,
+                pantWaist: document.getElementById('pantWaist').value,
+                hip: document.getElementById('hip').value,
+                thigh: document.getElementById('thigh').value,
+                jacketLength: document.getElementById('jacketLength').value,
+                jacketWidth: document.getElementById('jacketWidth').value,
+                pantsLength: document.getElementById('pantsLength').value,
+                pantsWidth: document.getElementById('pantsWidth').value,
+            };
+
+            const jacketSize = calculateJacketSize(formData);
+            const pantSize = calculatePantSize(formData);
+            const calculatedSize = `Jacket: ${jacketSize} | Pants: ${pantSize}`;
+
+            const userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                size: calculatedSize,
+                detailedMeasurements: formData
+            };
+
+            localStorage.setItem('mea_user_data', JSON.stringify(userData));
+
+            // Send data to Google Sheets Backend
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyypmY7NwoUI35JeEUjlTFHP-wGA5dGgSU7nZh3kL0b3afZCVOjyrm7aooileAv1WBB/exec'; 
+            
+            // Prepare data for POST body
+            const bodyData = new URLSearchParams({
+                name: userData.name,
+                email: userData.email,
+                phone: userData.phone,
+                bust: formData.bust,
+                naturalWaist: formData.naturalWaist,
+                pantWaist: formData.pantWaist,
+                hip: formData.hip,
+                thigh: formData.thigh,
+                jacketLength: formData.jacketLength,
+                jacketWidth: formData.jacketWidth,
+                pantsLength: formData.pantsLength,
+                pantsWidth: formData.pantsWidth,
+                size: calculatedSize
+            });
+
+            console.log('Sending data to:', scriptURL);
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors',
+                keepalive: true,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: bodyData.toString()
+            })
+            .then(() => {
+                console.log('Data successfully sent (no-cors)');
+            })
+            .catch(error => {
+                console.error('Error sending data:', error);
+            });
+
+            // Delay redirect to ensure request completes
+            setTimeout(() => {
+                window.location.href = 'leadercheckout.html';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
