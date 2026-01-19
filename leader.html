@@ -245,20 +245,22 @@
         
         <p class="intro-text">Take your measurements and fill out the size tool below to get your size. After you get your size, you can pre-order your suit.</p>
 
-        <form id="sizeForm" style="display: block;">
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <form id="sizeForm" style="display: block;" method="POST" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbyypmY7NwoUI35JeEUjlTFHP-wGA5dGgSU7nZh3kL0b3afZCVOjyrm7aooileAv1WBB/exec">
+            <input type="hidden" id="sizeInput" name="size" value="">
             <!-- Personal Info -->
             <div class="inputs-subgrid" style="margin-bottom: 30px; grid-template-columns: 1fr 1fr;">
                 <div class="full-width-col">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div>
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div>
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" required>
+                    <input type="tel" id="phone" name="phone" required>
                 </div>
             </div>
 
@@ -355,6 +357,8 @@
     </div>
 
     <script>
+        let submitted = false;
+
         // Size calculation functions adapted from Size Finder Tool
         function calculateJacketSize(data) {
             const bust = parseFloat(data.bust);
@@ -370,13 +374,19 @@
             return `${baseSize} ${data.pantsLength}, ${data.pantsWidth}`;
         }
 
-        document.getElementById('sizeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.getElementById('hidden_iframe').addEventListener('load', function() {
+            if (submitted) {
+                console.log("Iframe loaded, redirecting...");
+                window.location.href = 'leadercheckout.html';
+            }
+        });
 
-            const submitBtn = this.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Please Wait...';
+        document.getElementById('sizeForm').addEventListener('submit', function(e) {
+            // We do NOT prevent default, allowing the form to submit to the iframe
             
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Gather data for calculation (and localStorage)
             const formData = {
                 bust: document.getElementById('bust').value,
                 naturalWaist: document.getElementById('naturalWaist').value,
@@ -393,6 +403,9 @@
             const pantSize = calculatePantSize(formData);
             const calculatedSize = `Jacket: ${jacketSize} | Pants: ${pantSize}`;
 
+            // Update the hidden input that sends 'size' to Google Sheets
+            document.getElementById('sizeInput').value = calculatedSize;
+
             const userData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -403,55 +416,16 @@
 
             localStorage.setItem('mea_user_data', JSON.stringify(userData));
 
-            // Send data to Google Sheets Backend
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyypmY7NwoUI35JeEUjlTFHP-wGA5dGgSU7nZh3kL0b3afZCVOjyrm7aooileAv1WBB/exec'; 
-            
-            // Prepare data for POST body
-            const bodyData = new URLSearchParams({
-                name: userData.name,
-                email: userData.email,
-                phone: userData.phone,
-                bust: formData.bust,
-                naturalWaist: formData.naturalWaist,
-                pantWaist: formData.pantWaist,
-                hip: formData.hip,
-                thigh: formData.thigh,
-                jacketLength: formData.jacketLength,
-                jacketWidth: formData.jacketWidth,
-                pantsLength: formData.pantsLength,
-                pantsWidth: formData.pantsWidth,
-                size: calculatedSize
-            });
+            submitted = true;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Please Wait...';
 
-            console.log('Sending data to:', scriptURL);
-
-            fetch(scriptURL, { 
-                method: 'POST', 
-                mode: 'no-cors',
-                keepalive: true,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: bodyData.toString()
-            })
-            .then(() => {
-                console.log('Data successfully sent (no-cors)');
-                // Navigate only after successful send
-                window.location.href = 'leadercheckout.html';
-            })
-            .catch(error => {
-                console.error('Error sending data:', error);
-                // Even if error, attempt to move forward or alert user
-                // For now, let's move forward as fallback
-                window.location.href = 'leadercheckout.html';
-            });
-
-            // Backstop timeout in case fetch hangs indefinitely (e.g. 5 seconds)
+            // Fallback: If iframe load doesn't fire (rare), redirect anyway after a generous timeout
             setTimeout(() => {
-                // Check if we haven't navigated yet (though checking is hard without a flag)
-                // We'll just set it. If already navigating, this does nothing extra.
-                 window.location.href = 'leadercheckout.html';
-            }, 5000);
+                if (submitted) {
+                    window.location.href = 'leadercheckout.html';
+                }
+            }, 6000);
         });
     </script>
 </body>
