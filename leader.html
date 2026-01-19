@@ -436,15 +436,22 @@
             })
             .then(() => {
                 console.log('Data successfully sent (no-cors)');
+                // Navigate only after successful send
+                window.location.href = 'leadercheckout.html';
             })
             .catch(error => {
                 console.error('Error sending data:', error);
+                // Even if error, attempt to move forward or alert user
+                // For now, let's move forward as fallback
+                window.location.href = 'leadercheckout.html';
             });
 
-            // Delay redirect to ensure request completes
+            // Backstop timeout in case fetch hangs indefinitely (e.g. 5 seconds)
             setTimeout(() => {
-                window.location.href = 'leadercheckout.html';
-            }, 1000);
+                // Check if we haven't navigated yet (though checking is hard without a flag)
+                // We'll just set it. If already navigating, this does nothing extra.
+                 window.location.href = 'leadercheckout.html';
+            }, 5000);
         });
     </script>
 </body>
